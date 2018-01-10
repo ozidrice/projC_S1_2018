@@ -1,11 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "monde.h"
-
-//TEST
-
+#include "jeu.h"
 
 int main(int argc, char argv[]){
-	Monde *monde = creerMonde();
-	afficherMonde(monde);
+	lancer();
 }

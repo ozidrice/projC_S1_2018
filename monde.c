@@ -3,7 +3,7 @@
 #include "unite.h"
 
 /*SIZE OF THE WORLD*/
-#define LENGHT 12
+#define HEIGHT 12
 #define WIDTH 18
 
 
@@ -12,7 +12,7 @@
 #define BLUE 'b'
 
 typedef struct monde{
-	Unite *plateau[LENGHT][WIDTH];
+	Unite *plateau[HEIGHT][WIDTH];
 	int tour; /*num tour*/
 	UListe rouge, bleu; /*Liste des deux joueurs*/
 }Monde;
@@ -26,7 +26,7 @@ Monde *creerMonde(){
 }
 
 void afficherMonde(Monde *m){
-	for (int i = 0; i < LENGHT; ++i)
+	for (int i = 0; i < HEIGHT; ++i)
 	{
 		for (int j = 0; j < WIDTH; ++j)
 		{
