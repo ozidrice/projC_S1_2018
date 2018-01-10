@@ -5,10 +5,8 @@
 #define GUERRIER 'g'
 
 typedef struct unite{
-	int posX, posY; /*position sur le monde*/
 	char couleur;	/*team*/
 	char genre;		/*type d'unite*/
-	struct unite *suiv;	
 }Unite;
 
 typedef Unite* UListe;
