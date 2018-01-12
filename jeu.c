@@ -6,9 +6,8 @@ static Monde *monde; //Static = variable accessibles à toutes les fonctions du 
 
 void menu(){
 	int choice;
-	printf("Choix : ");
+	printf("[0]: Quitter\n[1]: Afficher le monde\nVotre choix:");
 	scanf("%d",&choice);
-
 
 	switch(choice){
 		case 0:
@@ -35,5 +34,6 @@ void loop(){
 
 void lancer(){
 	monde = creerMonde();
+	initialiserMonde(monde);
 	loop();
 }
