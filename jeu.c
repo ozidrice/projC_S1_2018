@@ -14,6 +14,8 @@ static Joueur *joueurCourant;
 #define RED 'r'
 #define BLUE 'b'
 
+void lancer();
+
 void printDelimiteur(){
 	printf("____________________\n");
 }
@@ -71,7 +73,7 @@ void menu(){
 	int action_finisseuse_tour;
 	do{
 		action_finisseuse_tour = 0;
-		printf("[0]: Quitter\n[1]: Action (déplacer/attaquer)\nVotre choix:");
+		printf("[0]: Quitter\n[1]: Recommencer\n[2]: Action (déplacer/attaquer)\nVotre choix:");
 		scanf("%d",&choice);
 
 		switch(choice){
@@ -79,6 +81,8 @@ void menu(){
 			exit(0);
 			break;
 			case 1:
+			lancer();
+			case 2:
 			actionUnite();
 			action_finisseuse_tour = 1;
 			break;
@@ -116,20 +120,42 @@ void afficherListeJoueur(){
 	}
 }
 
+Joueur *get_joueur(char color){
+	for (int i = 0; i < 2; ++i)
+	{
+		Joueur *j = liste_joueurs[i];
+		if(get_joueur_couleur(j) == color){
+			return j;
+		}
+	}
+	return 0;
+}
+
 
 
 void loop(){
-	while(partieFinie(monde) == 0){
-		for (int i = 0; i < 2; ++i){
-			afficherMonde(monde);
-			joueurCourant = liste_joueurs[i];
-			printDelimiteur();
-			printf("C'est au tour de ");
-			afficherJoueur(joueurCourant);
-			menu();
+	while(1){
+		while(partieFinie(monde) == 0){
+			for (int i = 0; i < 2; ++i){
+				afficherMonde(monde);
+				joueurCourant = liste_joueurs[i];
+				printDelimiteur();
+				printf("C'est au tour de ");
+				afficherJoueur(joueurCourant);
+				menu();
+			}
 		}
+		printDelimiteur();
+		printf("La partie est finie\n");
+		if(get_nb_vivant(monde,RED) == 0){
+			afficherJoueur(get_joueur(RED));
+		}else if(get_nb_vivant(monde,BLUE)){
+			afficherJoueur(get_joueur(BLUE));
+		}
+		printf(" a gagné\n");
 	}
 }
+
 
 
 
