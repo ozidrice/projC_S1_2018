@@ -62,7 +62,6 @@ Monde *creerMonde(){
 *	return 0 si vide
 */
 Unite *getUnite(Monde *m, int x, int y) {
-	printUnite(m->plateau[0][1]);
 	if (x>=0 && x<=WIDTH-1 && y>=0 && y<HEIGHT-1) {
 		return m->plateau[x][y];
 	}
