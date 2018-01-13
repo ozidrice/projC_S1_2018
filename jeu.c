@@ -1,10 +1,6 @@
 
 #include "unite.h"
 #include "monde.h"
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 #include "joueur.h"
 
 #include <stdio.h>
@@ -47,7 +43,7 @@ void actionUnite(){
 			printf("[ERREUR] : Unité introuvable.\n");
 			erreur = 1;
 		}
-		if(joueurCourant->couleur == u->couleur){
+		if(get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
 			printf("[ERREUR] : cette unité ne vous appartient pas.\n");
 			erreur = 1;
 		}
@@ -84,6 +80,7 @@ void menu(){
 		break;
 		case 2:
 		actionUnite();
+		break;
 		default:
 		printf("NOTHING HERE\n");
 		break;
