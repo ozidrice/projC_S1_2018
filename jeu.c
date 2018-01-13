@@ -30,24 +30,6 @@ void printDelimiteur(){
 
 void menu(){
 	int choice;
-
-	printf("[0]: Quitter\n[1]: Afficher le monde\n");
-	printf("Votre choix: ");
-
-
-
-
-	printf("Choix : ");
-	scanf("%d",&choice);
-
-
-
-	printf("[0]: Quitter\n[1]: Afficher le monde\nVotre choix:");
-
-	scanf("%d",&choice);
-
-
-
 	printf("[0]: Quitter\n[1]: Afficher le monde\nVotre choix:");
 	scanf("%d",&choice);
 
@@ -58,17 +40,7 @@ void menu(){
 		break;
 		case 1: 
 		afficherMonde(monde);
-
 		break;
-
-
-
-		break;
-
-
-
-
-
 		default:
 		printf("NOTHING HERE\n");
 		break;
