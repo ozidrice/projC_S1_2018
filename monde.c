@@ -77,27 +77,17 @@ void afficherMonde(Monde *m){
 	for (i = 0; i < HEIGHT; ++i)
 	{
 		printf("%c",'A'+i);
+		int i;
+		for (i = 0; i < HEIGHT; ++i){
+			int j;
+			for (j = 0; j < WIDTH; ++j)
+			{
+				printf("|");
+				printUnite(m->plateau[i][j]);
 
-
-
-	int i;
-	for (i = 0; i < HEIGHT; ++i)
-
-	for (int i = 0; i < HEIGHT; ++i)
-
-
-	for (int i = 0; i < HEIGHT; ++i)
-
-	{
-
-		int j;
-		for (j = 0; j < WIDTH; ++j)
-		{
-			printf("|");
-			printUnite(m->plateau[i][j]);
-			
+			}
+			printf("|\n");
 		}
-		printf("|\n");
 	}
 }
 

@@ -102,18 +102,6 @@ void afficherListeJoueur(){
 	for(i = 0; i<2; ++i){
 		printf("Joueur %d: ",i+1);
 		afficherJoueur(liste_joueurs[i]);
-
-void loop(){
-	while(1){
-		menu();
-
-
-		// test(); //penser à retirer
-
-
-
-
-
 	}
 }
 
@@ -145,15 +133,6 @@ void loop(){
 
 
 
-
-void lancer(){
-	monde = creerMonde();
-
-
-
-
-
-
 void lancer(){
 	monde = creerMonde();
 	initialiserMonde(monde);
@@ -161,11 +140,6 @@ void lancer(){
 	initialiserListJoueurs();
 	printDelimiteur();
 	afficherListeJoueur();
-
-
-
-
-
 
 	loop();
 }
