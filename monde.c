@@ -15,9 +15,9 @@
 #define BLUE 'b'
 
 typedef struct monde{
-	Unite *plateau[HEIGHT][WIDTH];
+	Unite *plateau[WIDTH][HEIGHT];
 	int tour; /*num tour*/
-	UListe rouge, bleu; /*Liste des deux joueurs*/
+	// UListe rouge, bleu; Liste des deux joueurs
 }Monde;
 
 
@@ -45,11 +45,11 @@ Monde *creerMonde(){
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){;
 	m->plateau[0][0] = creerUnite(RED,SERF);
-	m->plateau[0][1] = creerUnite(RED,SERF);
-	m->plateau[0][2] = creerUnite(RED,GUERRIER);
-	m->plateau[HEIGHT-1][WIDTH-1] = creerUnite(BLUE,SERF);
-	m->plateau[HEIGHT-1][WIDTH-2] = creerUnite(BLUE,SERF);
-	m->plateau[HEIGHT-1][WIDTH-3] = creerUnite(BLUE,GUERRIER);
+	m->plateau[1][0] = creerUnite(RED,SERF);
+	m->plateau[2][0] = creerUnite(RED,GUERRIER);
+	m->plateau[WIDTH-1][HEIGHT-1] = creerUnite(BLUE,SERF);
+	m->plateau[WIDTH-1][HEIGHT-2] = creerUnite(BLUE,SERF);
+	m->plateau[WIDTH-1][HEIGHT-3] = creerUnite(BLUE,GUERRIER);
 }
 
 
@@ -81,7 +81,7 @@ void afficherMonde(Monde *m){
 		for (j = 0; j < WIDTH; ++j)
 		{
 			printf("|");
-			printUnite(m->plateau[i][j]);
+			printUnite(m->plateau[j][i]);
 
 		}
 		printf("|\n");
@@ -94,7 +94,11 @@ void afficherMonde(Monde *m){
 *	return 0 si vide
 */
 Unite *getUnite(Monde *m, int x, int y) {
-	return m->plateau[x][y];
+	printUnite(m->plateau[0][1]);
+	if (x>=0 && x<=WIDTH-1 && y>=0 && y<HEIGHT-1) {
+		return m->plateau[x][y];
+	}
+	return 0;
 }
 
 /*
@@ -109,7 +113,7 @@ int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
 
 	//Si vide
 	if (getUnite(m, newX, newY) == 0){
-		m->plateau[x][y] = m->plateau[newX][newY];
+		m->plateau[newX][newY] = m->plateau[x][y];
 		m->plateau[x][y] = 0;
 	}else{
 		if(attaque(m->plateau[x][y], m->plateau[newX][newY]) == 0) {
@@ -119,7 +123,6 @@ int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
 			if(attaque(m->plateau[x][y], m->plateau[newX][newY]) == -1) {
 				return 0;
 			}
-
 			m->plateau[x][y] = m->plateau[newX][newY];
 			m->plateau[x][y] = 0;
 		}
