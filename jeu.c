@@ -26,9 +26,11 @@ void actionUnite(){
 	char y;
 	int y_int;
 	int newY_int;
-	int erreur = 0;
+	int erreur;
 
 	do{
+		erreur =0;
+		u=0;
 		printf("Selectionnez une unité : \n");
 		
 		printf("Coordonnées x : ");
@@ -43,48 +45,51 @@ void actionUnite(){
 			printf("[ERREUR] : Unité introuvable.\n");
 			erreur = 1;
 		}
-		if(get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
+		if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
 			printf("[ERREUR] : cette unité ne vous appartient pas.\n");
 			erreur = 1;
 		}
 
-	 }while(erreur == 1);
-	erreur = 0;
-	 do{
-		 printf("Nouvelles coordonnées x : ");
-		 scanf("%d",&newX);
-		 printf("\n");
-		 printf("Nouvelles coordonnées y : ");
-		 scanf(" %c",&newY);
-		 newY_int = newY-'A';
-		 if(newX+1 != x && newX-1 != x && newY+1 != y && newY-1 != y){
-		 	erreur = 1;
-		 	printf("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
-		 }
-	 }while(erreur == 1);
-	 deplaceUnite(monde, x, y_int, newX, newY_int);
+	}while(erreur == 1);
+	
+	do{
+		erreur = 0;
+		printf("Nouvelles coordonnées x : ");
+		scanf("%d",&newX);
+		printf("\n");
+		printf("Nouvelles coordonnées y : ");
+		scanf(" %c",&newY);
+		newY_int = newY-'A';
+		if(newX+1 != x && newX-1 != x && newY+1 != y && newY-1 != y){
+			erreur = 1;
+			printf("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
+		}
+	}while(erreur == 1);
+	deplaceUnite(monde, x, y_int, newX, newY_int);
 }
 
 
 void menu(){
 	int choice;
-	printf("[0]: Quitter\n[1]: Afficher le monde\nVotre choix:");
-	scanf("%d",&choice);
+	int action_finisseuse_tour;
+	do{
+		action_finisseuse_tour = 0;
+		printf("[0]: Quitter\n[1]: Action (déplacer/attaquer)\nVotre choix:");
+		scanf("%d",&choice);
 
-	switch(choice){
-		case 0:
-		exit(0);
-		break;
-		case 1: 
-		afficherMonde(monde);
-		break;
-		case 2:
-		actionUnite();
-		break;
-		default:
-		printf("NOTHING HERE\n");
-		break;
-	}
+		switch(choice){
+			case 0:
+			exit(0);
+			break;
+			case 1:
+			actionUnite();
+			action_finisseuse_tour = 1;
+			break;
+			default:
+			printf("NOTHING HERE\n");
+			break;
+		}
+	}while(action_finisseuse_tour == 0);
 }
 
 
@@ -119,6 +124,7 @@ void afficherListeJoueur(){
 void loop(){
 	while(partieFinie(monde) == 0){
 		for (int i = 0; i < 2; ++i){
+			afficherMonde(monde);
 			joueurCourant = liste_joueurs[i];
 			printDelimiteur();
 			printf("C'est au tour de ");
