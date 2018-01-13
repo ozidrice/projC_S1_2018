@@ -62,8 +62,7 @@ Monde *creerMonde(){
 *	return 0 si vide
 */
 Unite *getUnite(Monde *m, int x, int y) {
-	printUnite(m->plateau[0][1]);
-	if (x>=0 && x<=WIDTH-1 && y>=0 && y<HEIGHT-1) {
+	if (x>=0 && x<WIDTH && y>=0 && y<HEIGHT) {
 		return m->plateau[x][y];
 	}
 	return 0;
@@ -144,6 +143,7 @@ int tuerUnite(Monde *m, int posX, int posY){
 *	attaque si case occupée
 */
 int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
+	printf("x: %d y: %d newX: %d newY: %d\n", x, y, newX, newY);
 	//Si mm position
 	if(x == newX && y == newY) {
 		return 0;

@@ -26,9 +26,11 @@ void actionUnite(){
 	char y;
 	int y_int;
 	int newY_int;
-	int erreur = 0;
+	int erreur;
 
 	do{
+		erreur =0;
+		u=0;
 		printf("Selectionnez une unité : \n");
 		
 		printf("Coordonnées x : ");
@@ -43,14 +45,15 @@ void actionUnite(){
 			printf("[ERREUR] : Unité introuvable.\n");
 			erreur = 1;
 		}
-		if(get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
+		if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
 			printf("[ERREUR] : cette unité ne vous appartient pas.\n");
 			erreur = 1;
 		}
 
 	 }while(erreur == 1);
-	erreur = 0;
+	
 	 do{
+	 	erreur = 0;
 		 printf("Nouvelles coordonnées x : ");
 		 scanf("%d",&newX);
 		 printf("\n");
