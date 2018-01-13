@@ -12,3 +12,4 @@ Unite *creerUnite();
 
 Unite *creerUnite();
 
+char get_unite_couleur(Unite *u);

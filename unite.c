@@ -96,15 +96,6 @@ int attaque(Unite *attaquant, Unite *cible) {
 	}
 }
 
-//à retirer
-// void test() {
-// 	Unite *u1 = malloc(sizeof(Unite));
-// 	u1->genre = SERF;
-// 	u1->couleur = 'a';
-
-// 	Unite *u2 = malloc(sizeof(Unite));
-// 	u2->genre = GUERRIER;
-// 	u2->couleur = 'b';
-
-// 	printf("%d\n", attaque(u1, u2));
-// }
+char get_unite_couleur(Unite *u){
+	return u->couleur;
+}

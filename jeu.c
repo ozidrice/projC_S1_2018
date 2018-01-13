@@ -1,7 +1,10 @@
 
 #include "unite.h"
 #include "monde.h"
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 #include "joueur.h"
 
 #include <stdio.h>
@@ -72,7 +75,6 @@ void menu(){
 	printf("[0]: Quitter\n[1]: Afficher le monde\nVotre choix:");
 	scanf("%d",&choice);
 
-
 	switch(choice){
 		case 0:
 		exit(0);
@@ -86,10 +88,7 @@ void menu(){
 		printf("NOTHING HERE\n");
 		break;
 	}
-
 }
-
-
 
 
 
@@ -121,7 +120,7 @@ void afficherListeJoueur(){
 
 
 void loop(){
-	while(1){
+	while(partieFinie(monde) == 0){
 		for (int i = 0; i < 2; ++i){
 			joueurCourant = liste_joueurs[i];
 			printDelimiteur();
