@@ -68,15 +68,45 @@ Unite *getUnite(Monde *m, int x, int y) {
 	return 0;
 }
 
+/*
+*	demande de positionner unité
+*/
+void getPosition(int *x, char *y, int *y_int){
+	int erreur;
+	do{
+		erreur = 0;
+		printf("Coordonnées x : ");
+		scanf("%d", x);
+		printf("Coordonnées y : ");
+		scanf(" %c", y);
+		*y_int = *y-'A';
+		if (*x<0 || *x>WIDTH-1 || *y_int<0 || *y_int>HEIGHT-1){
+			printf("[ERREUR] : entrez des coordonnées valides.\n");
+			erreur = 1;
+		}
+	}while (erreur == 1);
+}
+
+void positionneUnite(Monde *m, char couleur){
+	int nbGuerrier = 1, nbSerf = 2;
+	int i, x, y_int;
+	char y;
+	for (i=0 ; i<nbSerf ; i++){
+		printf("Placez le SERF n°%d :\n", i+1);
+		getPosition(&x, &y, &y_int);
+		m->plateau[x][y_int] = creerUnite(couleur,SERF);
+	}
+	for (i=0 ; i<nbGuerrier ; i++){
+		printf("Placez le GUERRIER n°%d :\n", i+1);
+		getPosition(&x, &y, &y_int);
+		m->plateau[x][y_int] = creerUnite(couleur,GUERRIER);
+	}
+}
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
-	m->plateau[0][0] = creerUnite(RED,SERF);
-	m->plateau[1][0] = creerUnite(RED,SERF);
-	m->plateau[2][0] = creerUnite(RED,GUERRIER);
-	m->plateau[WIDTH-1][HEIGHT-1] = creerUnite(BLUE,SERF);
-	m->plateau[WIDTH-1][HEIGHT-2] = creerUnite(BLUE,SERF);
-	m->plateau[WIDTH-1][HEIGHT-3] = creerUnite(BLUE,GUERRIER);
+	positionneUnite(m, RED);
+	positionneUnite(m, BLUE);
 
 	m->nbVivant_RED = 3;
 	m->nbVivant_BLUE = 3;
