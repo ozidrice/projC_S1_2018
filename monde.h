@@ -10,4 +10,4 @@ void initialiserMonde(Monde *m);
 
 
 void initialiserMonde(Monde *m);
-
+int partieFinie(Monde *m);

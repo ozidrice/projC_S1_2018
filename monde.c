@@ -17,9 +17,25 @@
 typedef struct monde{
 	Unite *plateau[HEIGHT][WIDTH];
 	int tour; /*num tour*/
-	UListe rouge, bleu; /*Liste des deux joueurs*/
+	int nbVivant_RED;
+	int nbVivant_BLUE;
 }Monde;
 
+int partieFinie(Monde *m){
+	if(m->nbVivant_BLUE == 0 || m->nbVivant_RED == 0)
+		return 1;
+	return 0;
+}
+
+int get_nb_vivant(Monde *m, char couleur){
+	if(couleur == RED){
+		return m->nbVivant_RED;
+	}
+	if(couleur == BLUE){
+		return m->nbVivant_BLUE;
+	}
+	return -1;
+}
 
 void clearPlateau(Monde *m){
 	int i;
@@ -35,21 +51,32 @@ Monde *creerMonde(){
 	Monde *m = malloc(sizeof(Monde));
 	if(m == NULL){
 		return 0;
-	} 
+	}
 	clearPlateau(m);
 	return m;
 }
 
 
+/*
+*	récupère Unite dans une case donnée
+*	return 0 si vide
+*/
+Unite *getUnite(Monde *m, int x, int y) {
+	return m->plateau[x][y];
+}
+
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
-void initialiserMonde(Monde *m){;
+void initialiserMonde(Monde *m){
 	m->plateau[0][0] = creerUnite(RED,SERF);
 	m->plateau[0][1] = creerUnite(RED,SERF);
 	m->plateau[0][2] = creerUnite(RED,GUERRIER);
 	m->plateau[HEIGHT-1][WIDTH-1] = creerUnite(BLUE,SERF);
 	m->plateau[HEIGHT-1][WIDTH-2] = creerUnite(BLUE,SERF);
 	m->plateau[HEIGHT-1][WIDTH-3] = creerUnite(BLUE,GUERRIER);
+	
+	m->nbVivant_RED = 3;
+	m->nbVivant_BLUE = 3;
 }
 
 
@@ -70,6 +97,7 @@ void afficherLigneHaut(){
 	printf("-\n");
 }
 
+
 void afficherMonde(Monde *m){
 
 	afficherLigneHaut();
@@ -89,13 +117,20 @@ void afficherMonde(Monde *m){
 	}
 }
 
-/*
-*	récupère Unite dans une case donnée
-*	return 0 si vide
-*/
-Unite *getUnite(Monde *m, int x, int y) {
-	return m->plateau[x][y];
+int tuerUnite(Monde *m, int posX, int posY){
+	Unite *u = getUnite(m,posX,posY);
+	if(u != 0){
+		if(get_unite_couleur(u) == RED){
+			m->nbVivant_RED--;
+		}else if(get_unite_couleur(u) == BLUE){
+			m->nbVivant_BLUE--;
+		}
+		m->plateau[posX][posY] = 0;
+		return 1;
+	}
+	return 0;
 }
+
 
 /*
 *	recoit nouvelles coordonnées pour déplacer Unite
@@ -113,15 +148,16 @@ int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
 		m->plateau[x][y] = 0;
 	}else{
 		if(attaque(m->plateau[x][y], m->plateau[newX][newY]) == 0) {
-			m->plateau[x][y] = 0;
+			tuerUnite(m,x,y);
 		}else{
 			//Si mm team
 			if(attaque(m->plateau[x][y], m->plateau[newX][newY]) == -1) {
 				return 0;
+			}else{
+				tuerUnite(m,newX,newY);
+				m->plateau[newX][newY] = m->plateau[x][y];
+				m->plateau[x][y] = 0;
 			}
-
-			m->plateau[x][y] = m->plateau[newX][newY];
-			m->plateau[x][y] = 0;
 		}
 	}
 	return 1;

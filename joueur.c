@@ -31,5 +31,8 @@ void afficherJoueur(Joueur *j){
 		printf("%s",PRINT_COLOR_BLUE);
 	}
 	printf("%s%s\n",j->nom,PRINT_COLOR_NORMAL);
+}
 
+char get_joueur_couleur(Joueur *j){
+	return j->couleur;
 }
