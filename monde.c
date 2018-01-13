@@ -71,25 +71,25 @@ void afficherLigneHaut(){
 }
 
 void afficherMonde(Monde *m){
-<<<<<<< HEAD
+
 	afficherLigneHaut();
 	int i;
 	for (i = 0; i < HEIGHT; ++i)
 	{
 		printf("%c",'A'+i);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
+
 	int i;
 	for (i = 0; i < HEIGHT; ++i)
-=======
+
 	for (int i = 0; i < HEIGHT; ++i)
->>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
-=======
+
+
 	for (int i = 0; i < HEIGHT; ++i)
->>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
+
 	{
->>>>>>> 6d454319c10e12fba454cc537b45ff9feaae2cd7
+
 		int j;
 		for (j = 0; j < WIDTH; ++j)
 		{
