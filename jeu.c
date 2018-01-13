@@ -38,8 +38,6 @@ void actionUnite(){
 		printf("Coordonnées y : ");
 		scanf(" %c",&y);
 		printf("\n");
-
-		y_int = y-'A';
 		u = getUnite(monde, x, y_int);
 		if(u==0){
 			printf("[ERREUR] : Unité introuvable.\n");
@@ -56,7 +54,6 @@ void actionUnite(){
 		erreur = 0;
 		printf("Nouvelles coordonnées x : ");
 		scanf("%d",&newX);
-		printf("\n");
 		printf("Nouvelles coordonnées y : ");
 		scanf(" %c",&newY);
 		newY_int = newY-'A';
@@ -138,11 +135,13 @@ void loop(){
 
 void lancer(){
 	monde = creerMonde();
-	initialiserMonde(monde);
 
 	initialiserListJoueurs();
 	printDelimiteur();
 	afficherListeJoueur();
+
+	afficherMonde(monde);
+	initialiserMonde(monde);
 
 	loop();
 }
