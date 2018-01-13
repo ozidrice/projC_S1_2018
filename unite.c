@@ -16,7 +16,14 @@
 typedef struct unite{
 	char couleur;	/*team*/
 	char genre;		/*type d'unite*/
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
+=======
+
+>>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
 }Unite;
 
 typedef Unite* UListe;
@@ -75,3 +82,36 @@ void printUnite(Unite *u){
 	}
 
 }
+
+/*
+*	Si attaquant gagne : return 1 
+*	Si attaquant perd : return 0
+*	Si attaque impossible : return -1
+*/
+int attaque(Unite *attaquant, Unite *cible) {
+	if (attaquant->couleur == cible->couleur){
+		return -1;
+	}
+	else if (attaquant->genre == cible->genre){
+		return 1;
+	}
+	else if (attaquant->genre == GUERRIER){
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+//à retirer
+// void test() {
+// 	Unite *u1 = malloc(sizeof(Unite));
+// 	u1->genre = SERF;
+// 	u1->couleur = 'a';
+
+// 	Unite *u2 = malloc(sizeof(Unite));
+// 	u2->genre = GUERRIER;
+// 	u2->couleur = 'b';
+
+// 	printf("%d\n", attaque(u1, u2));
+// }
