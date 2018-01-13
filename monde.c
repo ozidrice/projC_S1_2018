@@ -82,6 +82,15 @@ void initialiserMonde(Monde *m){
 	m->nbVivant_BLUE = 3;
 }
 
+void ligneMonde(){
+	int k;
+	printf("-+");
+	for (k=0;k<WIDTH;k++){
+		printf("---+");
+	}
+	printf("\n");
+}
+
 
 void afficherLigneHaut(){
 	printf(" ");
@@ -93,11 +102,7 @@ void afficherLigneHaut(){
 			printf(" ");
 	}
 	printf("|\n");
-	for (int i = 0; i < WIDTH; ++i)
-	{
-		printf("----");
-	}
-	printf("-\n");
+	ligneMonde();
 }
 
 
@@ -116,7 +121,7 @@ void afficherMonde(Monde *m){
 
 		}
 		printf("|\n");
-
+		ligneMonde();
 	}
 }
 
