@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define PRINT_COLOR_RED "\x1B[31m"
+#define PRINT_COLOR_BLUE "\x1B[34m"
+#define PRINT_COLOR_NORMAL "\x1B[0m"
+
 
 /*UNITES*/
 #define SERF 's'
@@ -31,10 +35,10 @@ Unite *creerUnite(char couleur, char genre){
 void printGenre(char genre){
 	switch(genre){
 		case SERF:
-		printf("S");
+		printf("SER");
 		break;
 		case GUERRIER:
-		printf("G");
+		printf("GUE");
 		break; 
 		default:
 		printf(" ");
@@ -45,10 +49,10 @@ void printGenre(char genre){
 void printCouleur(char couleur){
 	switch(couleur){
 		case RED:
-		printf("\x1B[31mR\x1B[0m");
+		printf("%sB%s",PRINT_COLOR_RED,PRINT_COLOR_NORMAL);
 		break;
 		case BLUE:
-		printf("\x1B[34mB\x1B[0m");
+		printf("%sB%s",PRINT_COLOR_BLUE,PRINT_COLOR_NORMAL);
 		break;
 		default:
 		printf(" ");
@@ -59,10 +63,15 @@ void printCouleur(char couleur){
 
 void printUnite(Unite *u){
 	if(u == 0){
-		printf("  ");
+		printf("   ");
 	}else{
-		printCouleur(u->couleur);
+		if(u->couleur == RED){
+			printf("%s",PRINT_COLOR_RED);
+		}else if(u->couleur == BLUE){
+			printf("%s",PRINT_COLOR_BLUE);
+		}
 		printGenre(u->genre);
+		printf("%s",PRINT_COLOR_NORMAL);
 	}
 
 }

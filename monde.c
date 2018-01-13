@@ -22,10 +22,10 @@ typedef struct monde{
 
 
 void clearPlateau(Monde *m){
-	int i = 0;
-	for(i; i<HEIGHT; ++i){
-		int j = 0;
-		for(j; j<WIDTH; ++j){
+	int i;
+	for(i = 0; i<HEIGHT; ++i){
+		int j;
+		for(j = 0; j<WIDTH; ++j){
 			m->plateau[i][j] = 0;
 		}
 	}
@@ -53,15 +53,36 @@ void initialiserMonde(Monde *m){;
 }
 
 
+void afficherLigneHaut(){
+	printf(" ");
+	int i;
+	for (i = 0; i < WIDTH; ++i){
+		printf("|");
+		printf(" %d", i);
+		if(i<10)
+			printf(" ");
+	}
+	printf("|\n");
+	for (int i = 0; i < WIDTH; ++i)
+	{
+		printf("----");
+	}
+	printf("-\n");
+}
 
 void afficherMonde(Monde *m){
-	for (int i = 0; i < HEIGHT; ++i)
+	afficherLigneHaut();
+	int i;
+	for (i = 0; i < HEIGHT; ++i)
 	{
-		for (int j = 0; j < WIDTH; ++j)
+		printf("%c",'A'+i);
+		int j;
+		for (j = 0; j < WIDTH; ++j)
 		{
+			printf("|");
 			printUnite(m->plateau[i][j]);
-			printf("	|");
+			
 		}
-		printf("\n");
+		printf("|\n");
 	}
 }
