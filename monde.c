@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "unite.h"
+#include "joueur.h"
+#include "jeu.h"
+
 
 /*SIZE OF THE WORLD*/
 #define HEIGHT 12
@@ -92,20 +95,44 @@ void positionneUnite(Monde *m, char couleur){
 	int i, x, y_int;
 	char y;
 	for (i=0 ; i<nbSerf ; i++){
-		printf("Placez le SERF n°%d :\n", i+1);
-		getPosition(&x, &y, &y_int);
+		Unite *u;
+		do{
+			printf("Placez le SERF n°%d :\n", i+1);
+			getPosition(&x, &y, &y_int);
+			u = getUnite(m, x, y_int);
+			if(u != 0){
+				printf("[ERREUR] : Impossible de placer une unité à cette position.\n");
+			}
+		}while(u != 0);
 		m->plateau[x][y_int] = creerUnite(couleur,SERF);
+		printf("\n");
 	}
 	for (i=0 ; i<nbGuerrier ; i++){
-		printf("Placez le GUERRIER n°%d :\n", i+1);
-		getPosition(&x, &y, &y_int);
+		Unite *u;
+		do{
+			printf("Placez le GUERRIER n°%d :\n", i+1);
+			getPosition(&x, &y, &y_int);
+			u = getUnite(m, x, y_int);
+			if(u != 0){
+				printf("[ERREUR] : Impossible de placer une unité à cette position.\n");
+			}
+		}while(u != 0);
 		m->plateau[x][y_int] = creerUnite(couleur,GUERRIER);
+		printf("\n");
 	}
+	
 }
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
+	printf("C'est au tour de ");
+	afficherJoueur(get_joueur(RED));
 	positionneUnite(m, RED);
+
+	printDelimiteur();
+
+	printf("C'est au tour de ");
+	afficherJoueur(get_joueur(BLUE));
 	positionneUnite(m, BLUE);
 
 	m->nbVivant_RED = 3;
