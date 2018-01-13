@@ -56,8 +56,12 @@ void initialiserMonde(Monde *m){;
 
 void afficherMonde(Monde *m){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	for (i = 0; i < HEIGHT; ++i)
+=======
+	for (int i = 0; i < HEIGHT; ++i)
+>>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
 =======
 	for (int i = 0; i < HEIGHT; ++i)
 >>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e

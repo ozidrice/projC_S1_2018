@@ -13,6 +13,10 @@ typedef struct unite{
 	char couleur;	/*team*/
 	char genre;		/*type d'unite*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
 =======
 
 >>>>>>> 88fad3fa8ae578fe7ce4af1a16ee382d8ecb956e
