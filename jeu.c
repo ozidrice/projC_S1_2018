@@ -1,7 +1,7 @@
-
+#include "joueur.h"
 #include "unite.h"
 #include "monde.h"
-#include "joueur.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
