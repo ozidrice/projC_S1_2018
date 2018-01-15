@@ -243,7 +243,7 @@ int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
 	if(x == newX && y == newY) {
 		return 0;
 	}
-
+	
 	//Si vide
 	if (getUnite(m, newX, newY) == 0){
 		m->plateau[newX][newY] = m->plateau[x][y];

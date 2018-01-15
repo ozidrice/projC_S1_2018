@@ -2,6 +2,7 @@
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_shape.h>
 #include <MLV/MLV_image.h>
+#include <MLV/MLV_text.h>
 #include "unite.h"
 #include "monde.h"
 
@@ -9,6 +10,7 @@
 #define HEIGHT 12
 #define WIDTH 18
 #define SQUARE_SIZE 60
+#define MARGE_BOTTOM 200
 
 /*UNITES*/
 #define SERF 's'
@@ -20,7 +22,7 @@
 
 
 void openWindow(){
-	MLV_create_window( "TEST", "TEST", WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE ); 
+	MLV_create_window( "TEST", "TEST", WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE+MARGE_BOTTOM ); 
 }
 
 void createSquares(){
@@ -42,11 +44,23 @@ void selectCase(int *positionX, int *positionY){
 	*positionY = y/SQUARE_SIZE;
 }
 
+void affiche_score(){
+}
+
+void affiche_message(char str[]){
+	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE, WIDTH*SQUARE_SIZE, MARGE_BOTTOM, MLV_COLOR_BLACK);
+	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
+	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE,
+                str, 
+                font, MLV_COLOR_WHITE
+        );
+	affiche_score();
+}
 
 void setupWindows(){
 	openWindow();
 	createSquares();
-	
+	affiche_message("Bonjour");
 	MLV_actualise_window();
 }
 
