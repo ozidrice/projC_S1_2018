@@ -34,7 +34,7 @@ void afficherJoueur(Joueur *j){
 }
 
 char *get_joueur_nom(Joueur *j){
-	return strcat(j->nom,'\0');
+	return j->nom;
 }
 
 char get_joueur_couleur(Joueur *j){
