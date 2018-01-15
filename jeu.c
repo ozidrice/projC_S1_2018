@@ -31,41 +31,51 @@ void actionUnite(){
 	int newY_int;
 	int erreur;
 
+	int err_deplacement;
 	do{
-		erreur =0;
-		u=0;
-		printf("Selectionnez une unité : \n");
-		
-		printf("Coordonnées x : ");
-		scanf("%d",&x);
-		printf("Coordonnées y : ");
-		scanf(" %c",&y);
-		printf("\n");
-		u = getUnite(monde, x, y_int);
-		if(u==0){
-			printf("[ERREUR] : Unité introuvable.\n");
-			erreur = 1;
-		}
-		if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
-			printf("[ERREUR] : cette unité ne vous appartient pas.\n");
-			erreur = 1;
-		}
+		err_deplacement = 0;
+		do{
+			erreur =0;
+			u=0;
+			printf("Selectionnez une unité : \n");
+			
+			printf("Coordonnées x : ");
+			scanf("%d",&x);
+			printf("Coordonnées y : ");
+			scanf(" %c",&y);
+			printf("\n");
+			u = getUnite(monde, x, y_int);
+			if(u==0){
+				printf("[ERREUR] : Unité introuvable.\n");
+				erreur = 1;
+			}
+			if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
+				printf("[ERREUR] : cette unité ne vous appartient pas.\n");
+				erreur = 1;
+			}
 
-	}while(erreur == 1);
+		}while(erreur == 1);
+		
+			do{
+				erreur = 0;
+				printf("Nouvelles coordonnées x : ");
+				scanf("%d",&newX);
+				printf("Nouvelles coordonnées y : ");
+				scanf(" %c",&newY);
+				newY_int = newY-'A';
+				if(newX+1 != x && newX-1 != x && newY+1 != y && newY-1 != y){
+					erreur = 1;
+					printf("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
+				}
+			}while(erreur == 1);
+
+			if(deplaceUnite(monde, x, y_int, newX, newY_int) != 1){
+				err_deplacement=1;
+				printf("[ERREUR] : Déplacement à cette case impossible.\n");
+			}
+	}while(err_deplacement == 1);
 	
-	do{
-		erreur = 0;
-		printf("Nouvelles coordonnées x : ");
-		scanf("%d",&newX);
-		printf("Nouvelles coordonnées y : ");
-		scanf(" %c",&newY);
-		newY_int = newY-'A';
-		if(newX+1 != x && newX-1 != x && newY+1 != y && newY-1 != y){
-			erreur = 1;
-			printf("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
-		}
-	}while(erreur == 1);
-	deplaceUnite(monde, x, y_int, newX, newY_int);
+
 }
 
 

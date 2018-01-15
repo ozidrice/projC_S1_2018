@@ -193,6 +193,10 @@ void afficherMonde(Monde *m){
 	}
 }
 
+/*
+* 	CaseX & CaseY : coordonnées de la case
+* 	x & y : coordonnées de la case sur la fenetre
+*/
 void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
 	*x = caseX*SQUARE_SIZE;
 	*y = caseY*SQUARE_SIZE;  
