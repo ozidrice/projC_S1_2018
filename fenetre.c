@@ -33,10 +33,20 @@ void createSquares(){
 	}
 }
 
+void selectCase(int *positionX, int *positionY){
+	int x,y;
+	MLV_wait_mouse(&x, &y);
+	
+	*positionX = x/SQUARE_SIZE;
+	*positionY = y/SQUARE_SIZE;
+}
+
 
 void setupWindows(){
 	openWindow();
 	createSquares();
+	
 	MLV_actualise_window();
+	selectCase();
 }
 
