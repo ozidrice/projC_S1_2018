@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <MLV/MLV_all.h>
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_shape.h>
@@ -140,18 +141,83 @@ void positionneUnite(Monde *m, char couleur){
 	}
 }
 
+/*
+* 	CaseX & CaseY : coordonnées de la case
+* 	x & y : coordonnées de la case sur la fenetre
+*/
+void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
+	*x = caseX*SQUARE_SIZE;
+	*y = caseY*SQUARE_SIZE;  
+}
+
+void MLV_afficherMonde(Monde *m){
+	createSquares();
+	int i;
+	for (i = 0; i < HEIGHT; ++i)
+	{
+		int j;
+		for (j = 0; j < WIDTH; ++j)
+		{
+			int x, y;
+			get_x_y_from_case(j,i,&x,&y);
+			MLV_printUnite(m->plateau[j][i],x,y);
+		}
+	}
+	MLV_actualise_window();
+}
+
+
+
+void MLV_positionneUnite(Monde *m, char couleur){
+	int nbGuerrier = 1, nbSerf = 2;
+	int i, x, y, x_final, y_final;
+
+	for (i=0 ; i<nbSerf ; i++){
+		Unite *u;
+		do{
+			affiche_message("Placez un SERF");
+			getMouse(&x, &y);
+			convert_from_px_to_square(x, y, &x_final, &y_final);
+			u = getUnite(m, x_final, y_final);
+			if(u != 0){
+				affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+			}
+		}while(u != 0);
+		m->plateau[x_final][y_final] = creerUnite(couleur,SERF);
+		printf("\n");
+		MLV_afficherMonde(m);
+	}
+	for (i=0 ; i<nbGuerrier ; i++){
+		Unite *u;
+		do{
+			affiche_message("Placez le GUERRIER");
+			getMouse(&x, &y);
+			convert_from_px_to_square(x, y, &x_final, &y_final);
+			u = getUnite(m, x_final, y_final);
+			if(u != 0){
+				affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+			}
+		}while(u != 0);
+		m->plateau[x_final][y_final] = creerUnite(couleur,GUERRIER);
+		printf("\n");
+		MLV_afficherMonde(m);
+	}
+}
+
+
+
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
 	printf("C'est au tour de ");
 	afficherJoueur(get_joueur(RED));
-	positionneUnite(m, RED);
+	MLV_positionneUnite(m, RED);
 
 	printDelimiteur();
 
 	printf("C'est au tour de ");
 	afficherJoueur(get_joueur(BLUE));
-	positionneUnite(m, BLUE);
+	MLV_positionneUnite(m, BLUE);
 
 	m->nbVivant_RED = 3;
 	m->nbVivant_BLUE = 3;
@@ -201,30 +267,6 @@ void afficherMonde(Monde *m){
 	}
 }
 
-/*
-* 	CaseX & CaseY : coordonnées de la case
-* 	x & y : coordonnées de la case sur la fenetre
-*/
-void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
-	*x = caseX*SQUARE_SIZE;
-	*y = caseY*SQUARE_SIZE;  
-}
-
-void MLV_afficherMonde(Monde *m){
-	createSquares();
-	int i;
-	for (i = 0; i < HEIGHT; ++i)
-	{
-		int j;
-		for (j = 0; j < WIDTH; ++j)
-		{
-			int x, y;
-			get_x_y_from_case(j,i,&x,&y);
-			MLV_printUnite(m->plateau[j][i],x,y);
-		}
-	}
-	MLV_actualise_window();
-}
 
 
 int tuerUnite(Monde *m, int posX, int posY){
