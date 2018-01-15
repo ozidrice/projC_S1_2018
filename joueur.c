@@ -33,6 +33,10 @@ void afficherJoueur(Joueur *j){
 	printf("%s%s\n",j->nom,PRINT_COLOR_NORMAL);
 }
 
+char *get_joueur_nom(Joueur *j){
+	return strcat(j->nom,'\0');
+}
+
 char get_joueur_couleur(Joueur *j){
 	return j->couleur;
 }
