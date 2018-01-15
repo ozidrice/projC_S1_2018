@@ -122,6 +122,7 @@ void MLV_printUnite(Unite *u, int x, int y){
 		}else if(get_unite_couleur(u) == BLUE){
 			MLV_draw_filled_rectangle(x, y, SQUARE_SIZE, SQUARE_SIZE, MLV_COLOR_BLUE);
 		}
+		MLV_draw_rectangle(x, y, SQUARE_SIZE, SQUARE_SIZE, MLV_COLOR_WHITE);
 
 		if(get_unite_genre(u) == SERF){
 			img = MLV_load_image(img_SERF);

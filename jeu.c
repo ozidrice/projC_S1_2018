@@ -125,28 +125,7 @@ void MLV_actionUnite() {
 }
 
 void menu(){
-	int choice;
-	int action_finisseuse_tour;
-	do{
-		action_finisseuse_tour = 0;
-		printf("[0]: Quitter\n[1]: Recommencer\n[2]: Action (déplacer/attaquer)\nVotre choix:");
-		scanf("%d",&choice);
-
-		switch(choice){
-			case 0:
-			exit(0);
-			break;
-			case 1:
-			lancer();
-			case 2:
-			MLV_actionUnite();
-			action_finisseuse_tour = 1;
-			break;
-			default:
-			printf("NOTHING HERE\n");
-			break;
-		}
-	}while(action_finisseuse_tour == 0);
+	MLV_actionUnite();
 }
 
 
@@ -197,8 +176,7 @@ void loop(){
 				MLV_afficherMonde(monde);
 				joueurCourant = liste_joueurs[i];
 				printDelimiteur();
-				printf("C'est au tour de ");
-				afficherJoueur(joueurCourant);
+				//affiche_message(strcat("C'est au tour de ",get_joueur_nom(joueurCourant)));
 				menu();
 			}
 		}
