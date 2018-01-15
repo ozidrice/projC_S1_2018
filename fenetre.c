@@ -47,6 +47,5 @@ void setupWindows(){
 	createSquares();
 	
 	MLV_actualise_window();
-	selectCase();
 }
 

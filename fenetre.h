@@ -1,2 +1,2 @@
 void setupWindows();
-void selectCase()
+void selectCase(int *positionX, int *positionY);
