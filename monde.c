@@ -4,6 +4,7 @@
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_shape.h>
 #include <MLV/MLV_image.h>
+#include "fenetre.h"
 #include "unite.h"
 #include "joueur.h"
 #include "jeu.h"
@@ -198,6 +199,7 @@ void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
 }
 
 void MLV_afficherMonde(Monde *m){
+	createSquares();
 	int i;
 	for (i = 0; i < HEIGHT; ++i)
 	{

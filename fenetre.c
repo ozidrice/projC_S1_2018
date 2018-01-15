@@ -24,6 +24,7 @@ void openWindow(){
 }
 
 void createSquares(){
+	MLV_draw_filled_rectangle(0, 0, WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE, MLV_COLOR_BLACK);
 	int i;
 	for(i=0; i<HEIGHT; ++i){
 		int j;
