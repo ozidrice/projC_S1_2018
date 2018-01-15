@@ -8,3 +8,4 @@ void initialiserMonde(Monde *m);
 int partieFinie(Monde *m);
 int get_nb_vivant(Monde *m, char couleur);
 void MLV_afficherMonde(Monde *m);
+Unite *MLV_getUnite_from_mouse(Monde *m, int *x, int *y);

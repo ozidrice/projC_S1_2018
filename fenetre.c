@@ -33,14 +33,14 @@ void createSquares(){
 	}
 }
 
-void selectCase(int *positionX, int *positionY){
-	int x,y;
-	MLV_wait_mouse(&x, &y);
-	
+void convert_from_px_to_square(int x, int y, int *positionX, int *positionY){
 	*positionX = x/SQUARE_SIZE;
 	*positionY = y/SQUARE_SIZE;
 }
 
+void getMouse(int *x, int *y){
+	MLV_wait_mouse(x, y);
+}
 
 void setupWindows(){
 	openWindow();

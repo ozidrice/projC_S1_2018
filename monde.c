@@ -4,6 +4,7 @@
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_shape.h>
 #include <MLV/MLV_image.h>
+#include "fenetre.h"
 #include "unite.h"
 #include "joueur.h"
 #include "jeu.h"
@@ -80,6 +81,13 @@ Unite *getUnite(Monde *m, int x, int y) {
 	return 0;
 }
 
+Unite *MLV_getUnite_from_mouse(Monde *m, int *x, int *y) {
+	getMouse(x,y);
+	int squareX, squareY;
+	convert_from_px_to_square(*x,*y, &squareX, &squareY);
+	return getUnite(m,squareX,squareY);
+}
+
 /*
 *	demande de positionner unité
 */
@@ -98,6 +106,7 @@ void getPosition(int *x, char *y, int *y_int){
 		}
 	}while (erreur == 1);
 }
+
 
 void positionneUnite(Monde *m, char couleur){
 	int nbGuerrier = 1, nbSerf = 2;

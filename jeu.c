@@ -1,3 +1,5 @@
+#include <MLV/MLV_all.h>
+
 #include "fenetre.h"
 #include "joueur.h"
 #include "unite.h"
@@ -68,6 +70,49 @@ void actionUnite(){
 	deplaceUnite(monde, x, y_int, newX, newY_int);
 }
 
+void MLV_actionUnite() {
+	int x, y;
+	int x_select, y_select;
+	int x_depl, y_depl;
+	Unite *u;
+	int erreur;
+
+	do{
+		erreur =0;
+		u=0;
+		printf("Selectionnez une unité : \n");
+	
+		getMouse(&x, &y);
+		convert_from_px_to_square(x, y, &x_select, &y_select);
+		
+		u = getUnite(monde, x_select, y_select);
+		if(u==0){
+			printf("[ERREUR] : Unité introuvable.\n");
+			erreur = 1;
+		}
+		if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
+			printf("[ERREUR] : cette unité ne vous appartient pas.\n");
+			erreur = 1;
+		}
+	}while(erreur == 1);
+	
+	printf("______________\nTROUVE\n");
+	printf("x:%d \ty:%d\n",x_select,y_select);
+	printUnite(u);
+	printf("______________\n");
+	
+	do{
+		erreur = 0;
+		getMouse(&x, &y);
+		convert_from_px_to_square(x, y, &x_depl, &y_depl);
+		printf("x:%d \ty:%d\n",x_depl,y_depl);
+		if(y_depl+1 != y_select && y_depl-1 != y_select && x_depl+1 != x_select && x_depl-1 != x_select){
+			erreur = 1;
+			printf("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
+		}
+	}while(erreur == 1);
+	deplaceUnite(monde, x_select, y_select, x_depl, y_depl);
+}
 
 void menu(){
 	int choice;
@@ -84,7 +129,7 @@ void menu(){
 			case 1:
 			lancer();
 			case 2:
-			actionUnite();
+			MLV_actionUnite();
 			action_finisseuse_tour = 1;
 			break;
 			default:
@@ -99,7 +144,7 @@ void menu(){
 Joueur *initialiserJoueur(char couleur){
 	char nom[128];
 	do{
-		printf("Nom ? ");
+		printf("Nom : ");
 		scanf("%s",nom);
 	}while(strlen(nom) <= 0);
 	return creerJoueur(nom, couleur);
