@@ -9,7 +9,6 @@ int attaque(Unite *attaquant, Unite *cible);
 
 Unite *creerUnite();
 
-
-Unite *creerUnite();
-
 char get_unite_couleur(Unite *u);
+char get_unite_genre(Unite *u);
+void MLV_printUnite(Unite *u, int x, int y);

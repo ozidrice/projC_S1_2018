@@ -1,11 +1,23 @@
 #include <MLV/MLV_all.h>
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_shape.h>
+#include <MLV/MLV_image.h>
+#include "unite.h"
+#include "monde.h"
 
 /*SIZE OF THE WORLD*/
 #define HEIGHT 12
 #define WIDTH 18
 #define SQUARE_SIZE 60
+
+/*UNITES*/
+#define SERF 's'
+#define GUERRIER 'g'
+
+/*TEAM*/
+#define RED 'r'
+#define BLUE 'b'
+
 
 void openWindow(){
 	MLV_create_window( "TEST", "TEST", WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE ); 
@@ -27,5 +39,4 @@ void setupWindows(){
 	createSquares();
 	MLV_actualise_window();
 }
-
 

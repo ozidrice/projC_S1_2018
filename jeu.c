@@ -1,3 +1,4 @@
+#include "fenetre.h"
 #include "joueur.h"
 #include "unite.h"
 #include "monde.h"
@@ -26,7 +27,7 @@ void actionUnite(){
 	Unite *u;
 	int x;
 	char y;
-	int y_int;
+	int y_int = 0;
 	int newY_int;
 	int erreur;
 
@@ -138,6 +139,7 @@ void loop(){
 		while(partieFinie(monde) == 0){
 			for (int i = 0; i < 2; ++i){
 				afficherMonde(monde);
+				MLV_afficherMonde(monde);
 				joueurCourant = liste_joueurs[i];
 				printDelimiteur();
 				printf("C'est au tour de ");
@@ -158,7 +160,6 @@ void loop(){
 
 
 
-
 void lancer(){
 	monde = creerMonde();
 
@@ -167,6 +168,8 @@ void lancer(){
 	afficherListeJoueur();
 
 	afficherMonde(monde);
+	setupWindows();
+	MLV_afficherMonde(monde);
 	initialiserMonde(monde);
 
 	loop();

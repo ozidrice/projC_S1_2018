@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <MLV/MLV_all.h>
+#include <MLV/MLV_color.h>
+#include <MLV/MLV_shape.h>
+#include <MLV/MLV_image.h>
 #include "unite.h"
 #include "joueur.h"
 #include "jeu.h"
 
+
+/*SIZE OF THE WORLD*/
+#define HEIGHT 12
+#define WIDTH 18
+#define SQUARE_SIZE 60
 
 /*SIZE OF THE WORLD*/
 #define HEIGHT 12
@@ -120,8 +129,8 @@ void positionneUnite(Monde *m, char couleur){
 		m->plateau[x][y_int] = creerUnite(couleur,GUERRIER);
 		printf("\n");
 	}
-	
 }
+
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
@@ -138,6 +147,7 @@ void initialiserMonde(Monde *m){
 	m->nbVivant_RED = 3;
 	m->nbVivant_BLUE = 3;
 }
+
 
 void ligneMonde(){
 	int k;
@@ -182,7 +192,25 @@ void afficherMonde(Monde *m){
 	}
 }
 
+void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
+	*x = caseX*SQUARE_SIZE;
+	*y = caseY*SQUARE_SIZE;  
+}
 
+void MLV_afficherMonde(Monde *m){
+	int i;
+	for (i = 0; i < HEIGHT; ++i)
+	{
+		int j;
+		for (j = 0; j < WIDTH; ++j)
+		{
+			int x, y;
+			get_x_y_from_case(j,i,&x,&y);
+			MLV_printUnite(m->plateau[j][i],x,y);
+		}
+	}
+	MLV_actualise_window();
+}
 
 
 int tuerUnite(Monde *m, int posX, int posY){
