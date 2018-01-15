@@ -41,8 +41,9 @@ void convert_from_px_to_square(int x, int y, int *positionX, int *positionY){
 	*positionY = y/SQUARE_SIZE;
 }
 
-<<<<<<< HEAD
+
 void affiche_score(){
+
 }
 
 void affiche_message(char str[]){
@@ -53,10 +54,10 @@ void affiche_message(char str[]){
                 font, MLV_COLOR_WHITE
         );
 	affiche_score();
-=======
+}
+
 void getMouse(int *x, int *y){
 	MLV_wait_mouse(x, y);
->>>>>>> 5df1159c9286b79fc69a46aa7e478d4a9c448a24
 }
 
 void setupWindows(){
