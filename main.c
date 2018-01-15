@@ -2,6 +2,6 @@
 #include "fenetre.h"
 
 int main(int argc, char *argv[]){
-	openWindow();
+	setupWindows();
 	lancer();
 }

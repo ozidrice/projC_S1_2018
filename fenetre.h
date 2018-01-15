@@ -1,1 +1,1 @@
-void openWindow();
+void setupWindows();
