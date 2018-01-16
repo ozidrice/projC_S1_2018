@@ -63,7 +63,7 @@ void getMouse(int *x, int *y){
 void setupWindows(){
 	openWindow();
 	createSquares();
-	affiche_message("Bonjour");
+	//affiche_message("Bonjour");
 	MLV_actualise_window();
 }
 

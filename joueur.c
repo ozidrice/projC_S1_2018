@@ -25,12 +25,14 @@ Joueur *creerJoueur(char nom[], char couleur){
 }
 
 void afficherJoueur(Joueur *j){
-	if(j->couleur == RED){
-		printf("%s",PRINT_COLOR_RED);
-	}else if(j->couleur == BLUE){
-		printf("%s",PRINT_COLOR_BLUE);
+	if(j != 0){
+		if(j->couleur == RED){
+			printf("%s",PRINT_COLOR_RED);
+		}else if(j->couleur == BLUE){
+			printf("%s",PRINT_COLOR_BLUE);
+		}
+		printf("%s%s\n",j->nom,PRINT_COLOR_NORMAL);
 	}
-	printf("%s%s\n",j->nom,PRINT_COLOR_NORMAL);
 }
 
 char *get_joueur_nom(Joueur *j){
