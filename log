@@ -1,0 +1,66 @@
+monde.c: In function ‘MLV_positionneUnite’:
+monde.c:178:20: warning: passing argument 1 of ‘affiche_message’ from incompatible pointer type [-Wincompatible-pointer-types]
+    affiche_message("Placez un SERF");
+                    ^~~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: expected ‘Joueur * {aka struct joueur *}’ but argument is of type ‘char *’
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:178:4: error: too few arguments to function ‘affiche_message’
+    affiche_message("Placez un SERF");
+    ^~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: declared here
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:183:21: warning: passing argument 1 of ‘affiche_message’ from incompatible pointer type [-Wincompatible-pointer-types]
+     affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: expected ‘Joueur * {aka struct joueur *}’ but argument is of type ‘char *’
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:183:5: error: too few arguments to function ‘affiche_message’
+     affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+     ^~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: declared here
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:193:20: warning: passing argument 1 of ‘affiche_message’ from incompatible pointer type [-Wincompatible-pointer-types]
+    affiche_message("Placez le GUERRIER");
+                    ^~~~~~~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: expected ‘Joueur * {aka struct joueur *}’ but argument is of type ‘char *’
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:193:4: error: too few arguments to function ‘affiche_message’
+    affiche_message("Placez le GUERRIER");
+    ^~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: declared here
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:198:21: warning: passing argument 1 of ‘affiche_message’ from incompatible pointer type [-Wincompatible-pointer-types]
+     affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: expected ‘Joueur * {aka struct joueur *}’ but argument is of type ‘char *’
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+monde.c:198:5: error: too few arguments to function ‘affiche_message’
+     affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+     ^~~~~~~~~~~~~~~
+In file included from monde.c:8:0:
+fenetre.h:7:6: note: declared here
+ void affiche_message(Joueur *j,char str[]);
+      ^~~~~~~~~~~~~~~
+make: *** [hellomake] Erreur 1
+fenetre.c: In function ‘setupWindows’:
+fenetre.c:79:2: error: too many arguments to function ‘affiche_message’
+  affiche_message(0,"Bonjour");
+  ^~~~~~~~~~~~~~~
+fenetre.c:63:6: note: declared here
+ void affiche_message(char str[]){
+      ^~~~~~~~~~~~~~~
+make: *** [hellomake] Interrompre
