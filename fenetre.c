@@ -64,7 +64,7 @@ void MLV_affiche_joueur(Joueur *j){
 }
 
 void MLV_affiche_message(char str[]){
-	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50, WIDTH*SQUARE_SIZE, MARGE_BOTTOM-50, MLV_COLOR_BLACK);
+	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50, WIDTH*SQUARE_SIZE, 50, MLV_COLOR_BLACK);
 	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
 	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE+50,
 		str, 
@@ -74,16 +74,16 @@ void MLV_affiche_message(char str[]){
 }
 
 
-/*void MLV_affiche_err(char str[]){
-	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50, WIDTH*SQUARE_SIZE, MARGE_BOTTOM-50, MLV_COLOR_BLACK);
+void MLV_affiche_err(char str[]){
+	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50+50, WIDTH*SQUARE_SIZE, MARGE_BOTTOM-50-50, MLV_COLOR_BLACK);
 	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
-	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE+50,
+	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE+50+50,
 		str, 
-		font, MLV_COLOR_WHITE
+		font, MLV_COLOR_RED
 		);
 	MLV_actualise_window();
 }
-*/
+
 void getMouse(int *x, int *y){
 	MLV_wait_mouse(x, y);
 }

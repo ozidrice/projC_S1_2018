@@ -94,44 +94,47 @@ void MLV_actionUnite() {
 	int x_depl, y_depl;
 	Unite *u;
 	int erreur;
+	do{
+		erreur =0;
+		u=0;
+		MLV_affiche_message("Selectionnez une unité :");
+
+		getMouse(&x, &y);
+		convert_from_px_to_square(x, y, &x_select, &y_select);
+
+		u = getUnite(monde, x_select, y_select);
+		if(u==0){
+			MLV_affiche_err("[ERREUR] : Unité introuvable.");
+			erreur = 1;
+		}
+		if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
+			MLV_affiche_err("[ERREUR] : cette unité ne vous appartient pas.");
+			erreur = 1;
+		}
+	}while(erreur == 1);
+	MLV_affiche_err("");
+
+
 	int err_deplacement;
 	do{
-		do{
-			erreur =0;
-			u=0;
-			MLV_affiche_message("Selectionnez une unité :");
-			
-			getMouse(&x, &y);
-			convert_from_px_to_square(x, y, &x_select, &y_select);
-			
-			u = getUnite(monde, x_select, y_select);
-			if(u==0){
-				MLV_affiche_message("[ERREUR] : Unité introuvable.");
-				erreur = 1;
-			}
-			if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
-				MLV_affiche_message("[ERREUR] : cette unité ne vous appartient pas.");
-				erreur = 1;
-			}
-		}while(erreur == 1);
-		
-		
+		err_deplacement = 0;
 		do{
 			erreur = 0;
 			MLV_affiche_message("Placez votre unité :");
 			getMouse(&x, &y);
 			convert_from_px_to_square(x, y, &x_depl, &y_depl);
-			if(y_depl+1 != y_select && y_depl-1 != y_select && x_depl+1 != x_select && x_depl-1 != x_select){
+			if(y_depl+1 > y_select && y_depl-1 < y_select && x_depl+1 > x_select && x_depl-1 < x_select){
 				erreur = 1;
-				MLV_affiche_message("[ERREUR] : vous pouvez vous déplacer que d'une case.");
+				MLV_affiche_err("[ERREUR] : vous pouvez vous déplacer que d'une case.");
 			}
 		}while(erreur == 1);
 
 		if(deplaceUnite(monde, x_select, y_select, x_depl, y_depl) != 1){
 			err_deplacement=1;
-			MLV_affiche_message("[ERREUR] : Déplacement à cette case impossible.");
+			MLV_affiche_err("[ERREUR] : Déplacement à cette case impossible.");
 		}
 	}while(err_deplacement == 1);
+	MLV_affiche_err("");
 
 }
 
@@ -158,10 +161,10 @@ Joueur *MLV_initialiserJoueur(char couleur){
 		int topY = HEIGHT*SQUARE_SIZE;
 		int topX = (WIDTH*SQUARE_SIZE)/3;
 		MLV_wait_input_box_with_font(topX,topY,300,90,0,MLV_COLOR_WHITE,0,
-		"Entrez le nom du joueur :",
-		&nom,
-		font
-		);	
+			"Entrez le nom du joueur :",
+			&nom,
+			font
+			);	
 	}while(strlen(nom) <= 0);
 	return creerJoueur(nom, couleur);
 }

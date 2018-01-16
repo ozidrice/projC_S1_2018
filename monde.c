@@ -180,9 +180,10 @@ void MLV_positionneUnite(Monde *m, char couleur){
 			convert_from_px_to_square(x, y, &x_final, &y_final);
 			u = getUnite(m, x_final, y_final);
 			if(u != 0){
-				MLV_affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+				MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
 			}
 		}while(u != 0);
+		MLV_affiche_err("");
 		m->plateau[x_final][y_final] = creerUnite(couleur,SERF);
 		printf("\n");
 		MLV_afficherMonde(m);
@@ -195,9 +196,10 @@ void MLV_positionneUnite(Monde *m, char couleur){
 			convert_from_px_to_square(x, y, &x_final, &y_final);
 			u = getUnite(m, x_final, y_final);
 			if(u != 0){
-				MLV_affiche_message("[ERREUR] : Impossible de placer une unité à cette position.\n");
+				MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
 			}
 		}while(u != 0);
+		MLV_affiche_err("");
 		m->plateau[x_final][y_final] = creerUnite(couleur,GUERRIER);
 		printf("\n");
 		MLV_afficherMonde(m);
