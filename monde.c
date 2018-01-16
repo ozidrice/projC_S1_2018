@@ -209,12 +209,23 @@ void MLV_positionneUnite(Monde *m, char couleur){
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
+<<<<<<< HEAD
+	
+	printf("C'est au tour de ");
+	//afficherJoueur(get_joueur(RED));
+=======
 	MLV_affiche_joueur(get_joueur(RED));
+>>>>>>> master
 	MLV_positionneUnite(m, RED);
 
 	printDelimiteur();
 
+<<<<<<< HEAD
+	printf("C'est au tour de ");
+	//afficherJoueur(get_joueur(BLUE));
+=======
 	MLV_affiche_joueur(get_joueur(BLUE));
+>>>>>>> master
 	MLV_positionneUnite(m, BLUE);
 
 	m->nbVivant_RED = 3;

@@ -1,4 +1,7 @@
 #include <MLV/MLV_all.h>
+#include <MLV/MLV_text.h>
+#include <MLV/MLV_input_box.h>
+
 
 #include "fenetre.h"
 #include "joueur.h"
@@ -12,6 +15,11 @@
 static Monde *monde; //Static = variable accessibles à toutes les fonctions du fichier
 static Joueur *liste_joueurs[2];
 static Joueur *joueurCourant;
+
+/*SIZE OF THE WORLD*/
+#define HEIGHT 12
+#define WIDTH 18
+#define SQUARE_SIZE 60
 
 /*TEAM*/
 #define RED 'r'
@@ -143,6 +151,21 @@ Joueur *initialiserJoueur(char couleur){
 }
 
 
+Joueur *MLV_initialiserJoueur(char couleur){
+	char *nom;
+	do{
+		MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
+		int topY = HEIGHT*SQUARE_SIZE;
+		int topX = (WIDTH*SQUARE_SIZE)/3;
+		MLV_wait_input_box_with_font(topX,topY,300,90,0,MLV_COLOR_WHITE,0,
+		"Entrez le nom du joueur :",
+		&nom,
+		font
+		);	
+	}while(strlen(nom) <= 0);
+	return creerJoueur(nom, couleur);
+}
+
 void initialiserListJoueurs(){
 	printf("Entrez le nom du joueur 1 : \n");
 	liste_joueurs[0] = initialiserJoueur(RED);
@@ -150,12 +173,18 @@ void initialiserListJoueurs(){
 	liste_joueurs[1] = initialiserJoueur(BLUE);
 }
 
+
 void afficherListeJoueur(){
 	int i;
 	for(i = 0; i<2; ++i){
 		printf("Joueur %d: ",i+1);
 		afficherJoueur(liste_joueurs[i]);
 	}
+}
+
+void MLV_initialiserListJoueurs() {
+	liste_joueurs[0] = 	MLV_initialiserJoueur(RED);
+	liste_joueurs[1] = 	MLV_initialiserJoueur(BLUE);
 }
 
 Joueur *get_joueur(char color){
@@ -200,14 +229,16 @@ void loop(){
 void lancer(){
 	monde = creerMonde();
 
-	initialiserListJoueurs();
-	printDelimiteur();
-	afficherListeJoueur();
+	//printDelimiteur();
+	//afficherListeJoueur();
 
-	afficherMonde(monde);
 	setupWindows();
+	afficherMonde(monde);
 	MLV_afficherMonde(monde);
+	MLV_initialiserListJoueurs();
+
 	initialiserMonde(monde);
+	
 
 	loop();
 }

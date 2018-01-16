@@ -91,7 +91,11 @@ void getMouse(int *x, int *y){
 void setupWindows(){
 	openWindow();
 	createSquares();
+<<<<<<< HEAD
+	//affiche_message("Bonjour");
+=======
 	MLV_affiche_message("Bonjour");
+>>>>>>> master
 	MLV_actualise_window();
 }
 
