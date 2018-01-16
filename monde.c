@@ -176,7 +176,12 @@ void MLV_positionneUnite(Monde *m, char couleur){
 		Unite *u;
 		do{
 			MLV_affiche_message("Placez un SERF");
-			getMouse(&x, &y);
+			do{
+				getMouse(&x, &y);
+				if(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE){
+					MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+				}
+			}while(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE);
 			convert_from_px_to_square(x, y, &x_final, &y_final);
 			u = getUnite(m, x_final, y_final);
 			if(u != 0){
@@ -192,7 +197,12 @@ void MLV_positionneUnite(Monde *m, char couleur){
 		Unite *u;
 		do{
 			MLV_affiche_message("Placez le GUERRIER");
-			getMouse(&x, &y);
+			do{
+				getMouse(&x, &y);
+				if(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE){
+					MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+				}
+			}while(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE);
 			convert_from_px_to_square(x, y, &x_final, &y_final);
 			u = getUnite(m, x_final, y_final);
 			if(u != 0){

@@ -123,7 +123,14 @@ void MLV_actionUnite() {
 			MLV_affiche_message("Placez votre unité :");
 			getMouse(&x, &y);
 			convert_from_px_to_square(x, y, &x_depl, &y_depl);
-			if(y_depl+1 > y_select && y_depl-1 < y_select && x_depl+1 > x_select && x_depl-1 < x_select){
+			/*
+			si y_select > y_depl+1 && 
+		y+1
+		y-1
+		x+1
+		x-1
+			*/
+			if( (y_select > y_depl+1 || y_select < y_depl-1) || (x_select > x_depl+1 || x_select < x_depl-1)){
 				erreur = 1;
 				MLV_affiche_err("[ERREUR] : vous pouvez vous déplacer que d'une case.");
 			}
