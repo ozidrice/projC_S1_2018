@@ -91,18 +91,18 @@ void MLV_actionUnite() {
 		do{
 			erreur =0;
 			u=0;
-			MLV_affiche_message("Selectionnez une unité : \n");
+			MLV_affiche_message("Selectionnez une unité :");
 			
 			getMouse(&x, &y);
 			convert_from_px_to_square(x, y, &x_select, &y_select);
 			
 			u = getUnite(monde, x_select, y_select);
 			if(u==0){
-				MLV_affiche_message("[ERREUR] : Unité introuvable.\n");
+				MLV_affiche_message("[ERREUR] : Unité introuvable.");
 				erreur = 1;
 			}
 			if(u!=0 && get_joueur_couleur(joueurCourant) != get_unite_couleur(u)){
-				MLV_affiche_message("[ERREUR] : cette unité ne vous appartient pas.\n");
+				MLV_affiche_message("[ERREUR] : cette unité ne vous appartient pas.");
 				erreur = 1;
 			}
 		}while(erreur == 1);
@@ -110,18 +110,18 @@ void MLV_actionUnite() {
 		
 		do{
 			erreur = 0;
-			MLV_affiche_message("Placez votre unité : \n");
+			MLV_affiche_message("Placez votre unité :");
 			getMouse(&x, &y);
 			convert_from_px_to_square(x, y, &x_depl, &y_depl);
 			if(y_depl+1 != y_select && y_depl-1 != y_select && x_depl+1 != x_select && x_depl-1 != x_select){
 				erreur = 1;
-				MLV_affiche_message("[ERREUR] : vous pouvez vous déplacer que d'une case.\n");
+				MLV_affiche_message("[ERREUR] : vous pouvez vous déplacer que d'une case.");
 			}
 		}while(erreur == 1);
 
 		if(deplaceUnite(monde, x_select, y_select, x_depl, y_depl) != 1){
 			err_deplacement=1;
-			MLV_affiche_message("[ERREUR] : Déplacement à cette case impossible.\n");
+			MLV_affiche_message("[ERREUR] : Déplacement à cette case impossible.");
 		}
 	}while(err_deplacement == 1);
 

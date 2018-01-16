@@ -13,6 +13,7 @@
 #define SQUARE_SIZE 60
 #define MARGE_BOTTOM 200
 
+
 /*UNITES*/
 #define SERF 's'
 #define GUERRIER 'g'
@@ -46,7 +47,7 @@ void convert_from_px_to_square(int x, int y, int *positionX, int *positionY){
 void MLV_affiche_joueur(Joueur *j){
 	if(j != 0){
 		MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE, WIDTH*SQUARE_SIZE, 50, MLV_COLOR_BLACK);
-		
+
 		MLV_Color font_color;
 		if(get_joueur_couleur(j) == RED){
 			font_color= MLV_COLOR_RED;
@@ -63,6 +64,17 @@ void MLV_affiche_joueur(Joueur *j){
 }
 
 void MLV_affiche_message(char str[]){
+	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50, WIDTH*SQUARE_SIZE, MARGE_BOTTOM-50, MLV_COLOR_BLACK);
+	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
+	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE+50,
+		str, 
+		font, MLV_COLOR_WHITE
+		);
+	MLV_actualise_window();
+}
+
+
+void MLV_affiche_err(char str[]){
 	MLV_draw_filled_rectangle(0, HEIGHT*SQUARE_SIZE+50, WIDTH*SQUARE_SIZE, MARGE_BOTTOM-50, MLV_COLOR_BLACK);
 	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
 	MLV_draw_text_with_font(10, HEIGHT*SQUARE_SIZE+50,
