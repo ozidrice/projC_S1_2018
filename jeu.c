@@ -220,7 +220,7 @@ void loop(){
 		}else if(get_nb_vivant(monde,BLUE) == 0){
 			MLV_affiche_joueur(get_joueur(RED));
 		}
-		MLV_affiche_message(" a gagné !\n");
+		MLV_affiche_message(" a gagné !");
 	}
 }
 
