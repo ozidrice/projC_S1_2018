@@ -1,9 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <MLV/MLV_all.h>
+#include <MLV/MLV_color.h>
+#include <MLV/MLV_shape.h>
+#include <MLV/MLV_image.h>
+#include "fenetre.h"
 #include "unite.h"
 #include "joueur.h"
 #include "jeu.h"
 
+
+/*SIZE OF THE WORLD*/
+#define HEIGHT 12
+#define WIDTH 18
+#define SQUARE_SIZE 60
 
 /*SIZE OF THE WORLD*/
 #define HEIGHT 12
@@ -71,6 +82,13 @@ Unite *getUnite(Monde *m, int x, int y) {
 	return 0;
 }
 
+Unite *MLV_getUnite_from_mouse(Monde *m, int *x, int *y) {
+	getMouse(x,y);
+	int squareX, squareY;
+	convert_from_px_to_square(*x,*y, &squareX, &squareY);
+	return getUnite(m,squareX,squareY);
+}
+
 /*
 *	demande de positionner unité
 */
@@ -89,6 +107,7 @@ void getPosition(int *x, char *y, int *y_int){
 		}
 	}while (erreur == 1);
 }
+
 
 void positionneUnite(Monde *m, char couleur){
 	int nbGuerrier = 1, nbSerf = 2;
@@ -120,24 +139,97 @@ void positionneUnite(Monde *m, char couleur){
 		m->plateau[x][y_int] = creerUnite(couleur,GUERRIER);
 		printf("\n");
 	}
-	
 }
+
+/*
+* 	CaseX & CaseY : coordonnées de la case
+* 	x & y : coordonnées de la case sur la fenetre
+*/
+void get_x_y_from_case(int caseX, int caseY, int *x, int *y){
+	*x = caseX*SQUARE_SIZE;
+	*y = caseY*SQUARE_SIZE;  
+}
+
+void MLV_afficherMonde(Monde *m){
+	createSquares();
+	int i;
+	for (i = 0; i < HEIGHT; ++i)
+	{
+		int j;
+		for (j = 0; j < WIDTH; ++j)
+		{
+			int x, y;
+			get_x_y_from_case(j,i,&x,&y);
+			MLV_printUnite(m->plateau[j][i],x,y);
+		}
+	}
+	MLV_actualise_window();
+}
+
+
+
+void MLV_positionneUnite(Monde *m, char couleur){
+	int nbGuerrier = 1, nbSerf = 2;
+	int i, x, y, x_final, y_final;
+
+	for (i=0 ; i<nbSerf ; i++){
+		Unite *u;
+		do{
+			MLV_affiche_message("Placez un SERF");
+			do{
+				getMouse(&x, &y);
+				if(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE){
+					MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+				}
+			}while(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE);
+			convert_from_px_to_square(x, y, &x_final, &y_final);
+			u = getUnite(m, x_final, y_final);
+			if(u != 0){
+				MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+			}
+		}while(u != 0);
+		MLV_affiche_err("");
+		m->plateau[x_final][y_final] = creerUnite(couleur,SERF);
+		printf("\n");
+		MLV_afficherMonde(m);
+	}
+	for (i=0 ; i<nbGuerrier ; i++){
+		Unite *u;
+		do{
+			MLV_affiche_message("Placez le GUERRIER");
+			do{
+				getMouse(&x, &y);
+				if(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE){
+					MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+				}
+			}while(x>WIDTH*SQUARE_SIZE || y>HEIGHT*SQUARE_SIZE);
+			convert_from_px_to_square(x, y, &x_final, &y_final);
+			u = getUnite(m, x_final, y_final);
+			if(u != 0){
+				MLV_affiche_err("[ERREUR] : Impossible de placer une unité à cette position.");
+			}
+		}while(u != 0);
+		MLV_affiche_err("");
+		m->plateau[x_final][y_final] = creerUnite(couleur,GUERRIER);
+		printf("\n");
+		MLV_afficherMonde(m);
+	}
+}
+
+
+
 
 /*Créé 1 guerrier & 2 serfs pour chaque équipe*/
 void initialiserMonde(Monde *m){
-	printf("C'est au tour de ");
-	afficherJoueur(get_joueur(RED));
-	positionneUnite(m, RED);
-
-	printDelimiteur();
-
-	printf("C'est au tour de ");
-	afficherJoueur(get_joueur(BLUE));
-	positionneUnite(m, BLUE);
+	MLV_affiche_joueur(get_joueur(RED));
+	MLV_positionneUnite(m, RED);
+	MLV_affiche_joueur(get_joueur(BLUE));
+	MLV_positionneUnite(m, BLUE);
 
 	m->nbVivant_RED = 3;
 	m->nbVivant_BLUE = 3;
 }
+
 
 void ligneMonde(){
 	int k;
@@ -164,7 +256,6 @@ void afficherLigneHaut(){
 
 
 void afficherMonde(Monde *m){
-
 	afficherLigneHaut();
 	int i;
 	for (i = 0; i < HEIGHT; ++i)
@@ -181,7 +272,6 @@ void afficherMonde(Monde *m){
 		ligneMonde();
 	}
 }
-
 
 
 
@@ -209,7 +299,7 @@ int deplaceUnite(Monde *m, int x, int y, int newX, int newY) {
 	if(x == newX && y == newY) {
 		return 0;
 	}
-
+	
 	//Si vide
 	if (getUnite(m, newX, newY) == 0){
 		m->plateau[newX][newY] = m->plateau[x][y];
