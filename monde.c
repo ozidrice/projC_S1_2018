@@ -283,6 +283,7 @@ int tuerUnite(Monde *m, int posX, int posY){
 		}else if(get_unite_couleur(u) == BLUE){
 			m->nbVivant_BLUE--;
 		}
+		free(m->plateau[posX][posY]);
 		m->plateau[posX][posY] = 0;
 		return 1;
 	}
