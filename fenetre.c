@@ -24,7 +24,7 @@
 
 
 void openWindow(){
-	MLV_create_window( "TEST", "TEST", WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE+MARGE_BOTTOM ); 
+	MLV_create_window( "Jeu de plateau", "Jeu de plateau", WIDTH*SQUARE_SIZE, HEIGHT*SQUARE_SIZE+MARGE_BOTTOM ); 
 }
 
 void createSquares(){
@@ -92,5 +92,23 @@ void setupWindows(){
 	openWindow();
 	createSquares();
 	MLV_actualise_window();
+}
+
+void MLV_quit(){
+	int x, y;
+	MLV_draw_filled_rectangle(800, HEIGHT*SQUARE_SIZE+70, 200, 40, MLV_COLOR_WHITE);
+	MLV_Font* font = MLV_load_font( "font/Roboto-Light.ttf" , 20 );
+	MLV_draw_text_with_font(840, HEIGHT*SQUARE_SIZE+80,
+		"Quitter le jeu", 
+		font, MLV_COLOR_BLACK
+		);
+	MLV_actualise_window();
+	do {
+		getMouse(&x,&y);
+		if (x>=800 && x<=1000 && y>= HEIGHT*SQUARE_SIZE+70 && y<=HEIGHT*SQUARE_SIZE+100){
+			MLV_free_window();
+
+		}
+	}while(!(x>=800 && x<=1000 && y>= HEIGHT*SQUARE_SIZE+70 && y<=HEIGHT*SQUARE_SIZE+100)); 
 }
 

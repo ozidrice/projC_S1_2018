@@ -7,3 +7,4 @@ void convert_from_px_to_square(int x, int y, int *positionX, int *positionY);
 void MLV_affiche_message(char str[]);
 void MLV_affiche_joueur(Joueur *j);
 void MLV_affiche_err(char str[]);
+void MLV_quit();

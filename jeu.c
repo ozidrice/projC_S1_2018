@@ -9,6 +9,7 @@
 #include "monde.h"
 
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -209,29 +210,25 @@ Joueur *get_joueur(char color){
 }
 
 
-
 void loop(){
-	while(1){
-		while(partieFinie(monde) == 0){
-			for (int i = 0; i < 2 && partieFinie(monde) == 0; ++i){
-				joueurCourant = liste_joueurs[i];
-				MLV_affiche_joueur(joueurCourant);
-				MLV_affiche_message("C'est à votre tour");
-				afficherMonde(monde);
-				MLV_afficherMonde(monde);
-
-				printDelimiteur();
-				menu();
-			}
+	while(partieFinie(monde) == 0){
+		for (int i = 0; i < 2 && partieFinie(monde) == 0; ++i){
+			joueurCourant = liste_joueurs[i];
+			MLV_affiche_joueur(joueurCourant);
+			MLV_affiche_message("C'est à votre tour");
+			MLV_afficherMonde(monde);
+			menu();
 		}
-		MLV_afficherMonde(monde);
-		if(get_nb_vivant(monde,RED) == 0){
-			MLV_affiche_joueur(get_joueur(BLUE));
-		}else if(get_nb_vivant(monde,BLUE) == 0){
-			MLV_affiche_joueur(get_joueur(RED));
-		}
-		MLV_affiche_message(" a gagné !");
 	}
+	MLV_afficherMonde(monde);
+	if(get_nb_vivant(monde,RED) == 0){
+		MLV_affiche_joueur(get_joueur(BLUE));
+	}else if(get_nb_vivant(monde,BLUE) == 0){
+		MLV_affiche_joueur(get_joueur(RED));
+	}
+	MLV_affiche_message(" a gagné !");
+	MLV_quit();
+	free(monde);
 }
 
 
@@ -239,16 +236,11 @@ void loop(){
 void lancer(){
 	monde = creerMonde();
 
-	//printDelimiteur();
-	//afficherListeJoueur();
-
 	setupWindows();
-	afficherMonde(monde);
 	MLV_afficherMonde(monde);
 	MLV_initialiserListJoueurs();
 
 	initialiserMonde(monde);
 	
-
 	loop();
 }

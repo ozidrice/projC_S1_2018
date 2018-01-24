@@ -190,7 +190,6 @@ void MLV_positionneUnite(Monde *m, char couleur){
 		}while(u != 0);
 		MLV_affiche_err("");
 		m->plateau[x_final][y_final] = creerUnite(couleur,SERF);
-		printf("\n");
 		MLV_afficherMonde(m);
 	}
 	for (i=0 ; i<nbGuerrier ; i++){
@@ -211,7 +210,6 @@ void MLV_positionneUnite(Monde *m, char couleur){
 		}while(u != 0);
 		MLV_affiche_err("");
 		m->plateau[x_final][y_final] = creerUnite(couleur,GUERRIER);
-		printf("\n");
 		MLV_afficherMonde(m);
 	}
 }
